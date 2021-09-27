@@ -30,7 +30,8 @@ def encryption(n, encrpt, msg):
     cipher = ""
     splChar = [33, 34, 35, 36, 37, 38, 39, 40, 41, 91, 92, 93, 94, 95, 96, 123, 124, 125, 126]
     for i in msg:
-        cipher += str(((ord(i) ** encrpt) % n) * 123456789) + chr(random.choice(splChar))
+        value = ord(i) ** encrpt
+        cipher += str(successiveSub(value,encrpt,n)) + chr(random.choice(splChar))
     return cipher
 
 
@@ -46,10 +47,19 @@ def decryption(n, dycrpt, cipher):
         else:
             temp += i
 
+
+
     for i in parts:
-        msg += chr(((int(int(i) / 123456789) ** dycrpt) % n))
+        value = (int(int(i)) ** dycrpt)
+        msg += chr(successiveSub(value,dycrpt,n))
     return msg
 
+
+def successiveSub(value, power, n):
+    for _ in range(power - 1):
+        value = value - n
+
+    return value
 
 # *********************************************************************************************************************************************************************************************************************************************************************************************
 # steganography part
