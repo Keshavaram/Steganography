@@ -46,8 +46,6 @@ def decryption(n, dycrpt, cipher):
         else:
             temp += i
 
-
-
     for i in parts:
         msg += chr(((int(int(i) / 123456789) ** dycrpt) % n))
     return msg
